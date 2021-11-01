@@ -1,4 +1,4 @@
-# teboviewfomat
+# teboviewformat
 An attempt to reverse engineer enough of the Teboview (tvw) file format to allow Boardview generation
 
 ## Intro
