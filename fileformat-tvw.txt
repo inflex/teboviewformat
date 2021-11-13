@@ -32,22 +32,39 @@ Network names:
 
 
 
-Part entry:
-	string part namep
+PART entry:
+type/details	| description
+----------------------------------------
+string			part name
+int32				bounding box minimum x
+int32				bounding box minimum y
+int32				bounding box max x
+int32				bounding box max y
+int32				center x
+int32				center y
+int32				rotation (degrees)
+uint32			unknown (132)
+uint32			unknown (0)
+uint32			unknown (1417)
+uint8				unknown (1)
+string			metadata about part (100K etc)
+int16				unknown
+string			package name (case insensitive)
+string			unknown, possible UID
+uint32			unknown (0)
+uint32			pincount
+uint32			unknown (2)
+PINS				Array of pins
 
-0	int32 min(x,y), max(x,y), center(x,y), 
-24	int32 rotation (degrees)
-28	uint32 unknown (132? part index?)
-32	uint32 unknown (0)
-36	uint32 unknown (1417)
-40	uint8  unknown (1)
-	string Info (ie, 100K)
-	uint16 unknown	
-	string Package (lowercase, but listed in uppercase later in file)
-	string UID/unknown
-	uint32 unknown (0)
-	uint32 pincount
-	Pins: array of [Pin entry]
+
+PIN entry:
+type/details	| description
+----------------------------------------
+uint32			networkID/map entry  
+uint32			unknown (0)
+uint32			integer pin index (1-based, ie, 1, 2, 3...n)
+string			pin name (1, 2, 3 etc for small parts, or AA42, B24 etc for BGA)
+uint32			unknown (0)
 
 
 Pin entry:
