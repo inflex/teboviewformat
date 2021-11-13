@@ -1,21 +1,22 @@
 Little endian integers
 String format: [uint8 size][......]
 
-File header:
+FILE header:
 	string name1
 	uint32 unknown
 	string name2
 
 0x33 Section start?
 
-Section header:
+SECTION header:
 	string name1
 	string name2
 	string path (UTF8)
 
-Network names:
 
-	Headerblock size 0x4C bytes;
+NETWORK NAMES entry:
+------------------------------------------
+Headerblock size 0x4C bytes;
 	Offset 0x0D: 0x07
 	Offset 0x19: 0x04
 	Offset 0x45: (uint32) number of network names listed
@@ -67,43 +68,36 @@ string			pin name (1, 2, 3 etc for small parts, or AA42, B24 etc for BGA)
 uint32			unknown (0)
 
 
-Pin entry:
+Pin network ID entry:
 	Uint32 network/pin index ID, unsure of constraints
-			For all currently examined files, this is a 13-bit ID left shifted by 3; that is all IDs are divisible by 8.  IDs start as 0x00, then 0x08, 0x10, 0x18.  Where it is getting confusing is that 13 bits (8192) isn't enough range for large boards which typically have 10~30,000 pins.   
+			For all currently examined files, this ID always increments in steps of 8.  It's not gauranteed that the ID is sequentially updated with the pin count on the part, but it does seem that they're always unique. 
+
 			Unsure why the mechanics of this ID have been selected, there's likely a good reason but at this point unsure.   This is the key sticking point for making an initial boardview decoding. We need to determine how to map these IDs to the network names.
 			
-			![Example of +8 incrementing network/pin ID](assets/images/pinid-example-1.png)
 
-	Uint32 unknown
-	Uint32 integer pin index
-	string pin name
-	Uint32 unknown
-
-
-Pin:Network mapper .... UNKNOWN :(
-
-
-Package entry:
-	Uint8 (1)
-	string package name (uppercase,  CHIP0603R_14R173 etc)
-	Uint32 [3] seemingly moderately fixed 3 32-bit ints
-	Uint8 [0x50] Unknown header
-	uint32 -1 block end marker
-	uint32 10 block start marker
-	uint32 (x,y) (x,y)
-	uint32 -1 marker
-	uint32 10 marker
-	uint32 (x,y) (x,y)
-	uint32 -1 marker
-	uint32 10 marker
-	uint32 (x,y) (x,y)
-	uint32 -1 marker
-	uint32 10 marker
-	uint32 (x,y) (x,y)
-	uint32 0 marker [ end of sequence ]
-	Uint8 [0x39] unknown separator
+PACKAGE entry:
+type/details	| description
+----------------------------------------
+Uint8				 Unknown (1)
+string			 package name (uppercase,  CHIP0603R_14R173 etc)
+Uint32[3]		 seemingly moderately fixed 3 32-bit ints
+Uint8	[0x50]	 Unknown header
+uint32			 -1 block end marker
+uint32			 10 block start marker
+uint32[4]		 (x,y) (x,y)
+uint32			 -1 marker
+uint32			 10 marker
+uint32[4]		(x,y) (x,y)
+uint32			 -1 marker
+uint32			 10 marker
+uint32[4]		 (x,y) (x,y)
+uint32			 -1 marker
+uint32			 10 marker
+uint32[4]		 (x,y) (x,y)
+uint32			 0 marker [ end of sequence ]
+Uint8[0x39]		 unknown separator
 
 
 
-
-
+---------------
+END OF DOCUMENT
