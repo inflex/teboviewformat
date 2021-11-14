@@ -14,6 +14,30 @@ SECTION header:
 	string path (UTF8)
 
 
+Section->PAD
+0x1B block (BOTTOM layer)
+type	  description
+-------------------
+U32	  Start marker (0x0A)
+U32	  Network ID (from network array)
+U32	  Part Type / D-code (?)
+U32	  X coord
+U32	  Y coord
+U8		  ?
+U8		  ?
+U8		  ?
+U8		  ?
+U32	  x-something
+U32	  y-something
+U32	  x-something
+U32	  y-something
+U32	  ?
+U32	  ?
+U32	  0xF0 0A
+U8		  END (0xF0)
+
+
+
 NETWORK NAMES entry:
 ------------------------------------------
 Headerblock size 0x4C bytes;
