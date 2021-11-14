@@ -53,7 +53,7 @@ uint8				unknown (1)
 string			metadata about part (100K etc)
 int16				unknown
 string			package name (case insensitive)
-string			unknown, possible UID
+string			serial number	
 uint32			unknown (0)
 uint32			pincount
 uint32			unknown (2)
