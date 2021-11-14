@@ -122,6 +122,10 @@ TEXT LIST: TODO - unverified
 	]
 
 LAYER SECTION layout:
+	uint32 0x0
+	uint32 0x3 // Not always 3, sometimes 1; might be a layer type definition?
+	uint32 0x2
+	uint32 0x1
 	LAYER SECTION header
 	D-CODE TABLE
 	PAD LIST
@@ -143,11 +147,6 @@ LAYER SECTION layout:
 	uint32 0x0
 	uint32 0x0
 	uint32 0x0
-	# maybe this is actually part of next layer?
-	uint32 0x0
-	uint32 0x3
-	uint32 0x2
-	uint32 0x1
 
 
 Section->PAD
