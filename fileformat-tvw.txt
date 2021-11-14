@@ -95,10 +95,18 @@ uint32			unknown (2)
 PINS				Array of pins
 
 
+PAD table:
+type/details	 | description
+----------------------------------------
+***NOTHING KNOWN ABOUT THIS YET***
+I'm purely speculating that this table exists based on the part->pin array index uint32 and that changing that value changes the 
+
+
 PIN entry:
 type/details	| description
 ----------------------------------------
-uint32			networkID/map entry  
+uint32			Pad index number.  if you change this up/down by 8, it'll move the pin number string back/forth on the rendered display. Does NOT change the network or other details about the pad, so appears to be only for populating the pad name/id string.
+
 uint32			unknown (0)
 uint32			integer pin index (1-based, ie, 1, 2, 3...n)
 string			pin name (1, 2, 3 etc for small parts, or AA42, B24 etc for BGA)
