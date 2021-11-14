@@ -46,11 +46,13 @@ int32				bounding box max y
 int32				center x
 int32				center y
 int32				rotation (degrees)
-uint32			unknown (132)
-uint32			unknown (0)
+uint32			unknown (132, 133, 98, 10 .. not yet sure)
+uint32			part type (17 = connector, 5 = cap, 0 ==? IC etc )
 uint32			unknown (1417)
-uint8				unknown (1)
-string			metadata about part (100K etc)
+uint32			unknown (0)
+uint32			height	
+uint8				 unknown
+string			BOM Value / metadata about part (100K etc)
 int16				unknown
 string			package name (case insensitive)
 string			serial number	
