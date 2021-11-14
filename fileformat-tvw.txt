@@ -1,5 +1,5 @@
 Little endian integers
-String format: [uint8 size][......]
+String format: [uint8 size][......] (also known as Pascal string)
 
 FILE header:
 	string name1
@@ -8,10 +8,84 @@ FILE header:
 
 0x33 Section start?
 
-SECTION header:
-	string name1
-	string name2
+LAYER TYPE field
+value	| name
+0		Document
+1		Top
+2		Bottom
+3		Signal
+4		Power ground
+5		Solder Mask [Top]
+6		Solder Mask [Bottom]
+7		Silkscreen [Top]
+8		Silkscreen [Bottom]
+9		Paste [Top]
+10		Paste [Bottom]
+11		Drill
+12		Roul
+
+LAYER SECTION header:
+	string layer name
+	string initial name
 	string path (UTF8)
+	uint32 layer type (see table)
+	uint32 pad color
+	uint32 line color
+	uint32 unknown (usually less than 10, maybe some ID?)
+
+SHAPE TYPE field
+value	| name
+0		Round
+1		Rectangle?
+2		Round rectangle?
+3		Oblong
+
+
+D-CODE TABLE: indexed by D-Code field (minus 10), ie. if a Pad dcode is 11, it means 2nd entry here.
+	uint32 unknown1 (so far always 1)
+	int32 width
+	int32 height
+	# IF not last item (marked by 1, 0, 1):
+	uint32 shape type (see table)
+	uint32 extra1 (unknown yet)
+	uint32 extra2 (curvature radius for Oblong)
+# The end of the table seems to be indicated by a truncated item with 0,1 as bounds.
+
+
+PAD LIST: TODO
+
+LINE LIST: TODO
+
+SURFACE LIST: TODO
+
+TEXT LIST: TODO
+
+LAYER SECTION layout:
+	LAYER SECTION header
+	D-CODE TABLE
+	PAD LIST
+	LINE LIST
+	ARC LIST
+	SURFACE LIST
+	uint32 unknown ? (or maybe part of surface list???)
+	TEXT LIST ?
+	# the rest is unknown yet
+	uint32 0x0
+	uint32 0x7
+	uint32 0x0
+	uint32 0x0
+	uint32 0x4
+	uint32 0x0
+	uint32 0x0
+	uint32 0x0
+	uint32 0x0
+	uint32 0x0
+	uint32 0x0
+	# maybe this is actually part of next layer?
+	uint32 0x0
+	uint32 0x3
+	uint32 0x2
+	uint32 0x1
 
 
 NETWORK NAMES entry:
