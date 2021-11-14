@@ -34,6 +34,39 @@ Headerblock size 0x4C bytes;
 	
 
 
+PART TYPE field
+value	  | description
+0		  IC
+1		  DIODE
+2		  TRANSISTOR
+3		  RESISTOR
+4		  RESISTOR NETWORK(SI)
+5		  CAPACITOR
+6		  CAPACITOR NETWORK(SI)
+7		  ZENER
+8		  LED
+9		  JUMPER
+10		  BATTERY
+11		  MASK
+12		  RELAY
+13		  FUSE
+14		  CHOKE
+15		  CRYSTAL
+16		  SWITCH
+17		  CONNECTOR
+18		  TEST POINT
+19		  TRANSFORMER
+20		  POTENTIOMETER
+21		  MECHANICAL
+22		  RESISTOR NETWORK(DI)
+23		  RESISTOR NETWORK(SB)
+24		  RESISTOR NETWORK(DB)
+25		  CAPACITOR NETWORK(DI)
+26		  CAPACITOR NETWORK(SB)
+27		  CAPACITOR NETWORK(DB)
+28		  STRAP
+29		  FUDICIAL
+30		  UNKNOWN / END
 
 PART entry:
 type/details	| description
@@ -47,7 +80,7 @@ int32				center x
 int32				center y
 int32				rotation (degrees)
 uint32			unknown (132, 133, 98, 10 .. not yet sure)
-uint32			part type (17 = connector, 5 = cap, 0 ==? IC etc )
+uint32			part type ( see table )
 uint32			unknown (1417)
 uint32			unknown (0)
 uint32			height	
