@@ -52,13 +52,74 @@ D-CODE TABLE: indexed by D-Code field (minus 10), ie. if a Pad dcode is 11, it m
 # The end of the table seems to be indicated by a truncated item with 0,1 as bounds.
 
 
-PAD LIST: TODO
+PAD LIST:
+	uint32 count * [
+		uint32 unknown
+		int32 network
+		uint32 dcode (index into the dcode table + 10)
+		int32 x
+		int32 y
+		uint8 unknown probably a flag about more data
+		uint8 unknown probably a flag about more data
+		uint8 unknown probably a flag about more data
+		# optionally some more data, like hold position
+	]
 
-LINE LIST: TODO
+LINE LIST:
+	uint32 count
+	uint32 unknown
+	count * [
+		int32 network
+		uint32 dcode  (index into the dcode table + 10)
+		int32 x0
+		int32 y0
+		int32 x1
+		int32 y1
+	]
 
-SURFACE LIST: TODO
+ARC LIST:
+	uint32 count
+	uint32 unknown
+	count * [
+		int32 network
+		uint32 dcode  (index into the dcode table + 10)
+		int32 x
+		int32 y
+		int32 unknown - some of those must be start and end angle
+		int32 unknown
+		int32 unknown
+	]
 
-TEXT LIST: TODO
+SURFACE LIST:
+	uint32 count
+	uint32 unknown
+	count * [
+		int32 network
+		uint32 edges
+		edges * [
+			int32 x
+			int32 y
+		]
+		uint32 unknown (maybe linewidth ? 0 in current sample files)
+		uint32 voids
+		voids * [
+			uint32 unknown (maybe linewidth too??)
+			uint32 void_edges
+			void_edges * [
+				int32 x
+				int32 y
+			]
+		]
+		# some sample files seem to have an extra uint32 here !??
+	]
+
+TEXT LIST: TODO - unverified
+	uint32 count
+	uint32 unknown
+	count * [
+		string text
+		uint32 unknown[7]
+	]
 
 LAYER SECTION layout:
 	LAYER SECTION header
@@ -67,7 +128,8 @@ LAYER SECTION layout:
 	LINE LIST
 	ARC LIST
 	SURFACE LIST
-	uint32 unknown ? (or maybe part of surface list???)
+	uint32 unknown ?
+	# (or maybe part of surface list??? or another list that is empty in the test cases)
 	TEXT LIST ?
 	# the rest is unknown yet
 	uint32 0x0
