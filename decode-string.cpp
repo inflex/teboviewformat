@@ -133,7 +133,7 @@ int main( int argc, char **argv ) {
 	//
 	fprintf(stdout,"// Decoding Matrix\n");
 	fprintf(stdout,"//\n");
-	fprintf(stdout,"dec[][9] = {\n");
+	fprintf(stdout,"char dec['z'][9] = {\n");
 	for (int i = 0; i <= 'z'; i++) {
 		fprintf(stdout,"\t { ");
 		for (int j = 0; j < 8; j++) {
@@ -151,7 +151,7 @@ int main( int argc, char **argv ) {
 
 	fprintf(stdout,"// Encoding Matrix\n");
 	fprintf(stdout,"//\n");
-	fprintf(stdout,"enc[][9] = {\n");
+	fprintf(stdout,"char enc['z'][9] = {\n");
 	for (int i = 0; i <= 'z'; i++) {
 		fprintf(stdout,"\t{ ");
 		for (int c = 0; c < 8; c++) {
