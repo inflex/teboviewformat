@@ -3,86 +3,101 @@
 #include <string.h>
 #include <ctype.h>
 
-char dec['z'][9] = {0};
-char enc['z'][9] = {0};
+char dec['z'+1][11] = {0};
+char enc['z'+1][11] = {0};
+
+#define RWIDTH 10
 
 void translate_init( void ) {
 
 	memset(dec, 0, sizeof(dec));
 	memset(enc, 0, sizeof(enc));
 
-	snprintf(dec['0'], 9, "efgefgef");
-	snprintf(dec['1'], 9, "fghfghfg");
-	snprintf(dec['2'], 9, "ghighigh");
-	snprintf(dec['3'], 9, "hijhijhi");
-	snprintf(dec['4'], 9, "ijaijaij");
-	snprintf(dec['5'], 9, "jabjabja");
-	snprintf(dec['6'], 9, "abcabcab");
-	snprintf(dec['7'], 9, "bcdbcdbc");
-	snprintf(dec['8'], 9, "cdecdecd");
-	snprintf(dec['9'], 9, "defdefde");
+	snprintf(dec['0'], (RWIDTH +1), "efgefgefge");
+	snprintf(dec['1'], (RWIDTH +1), "fghfghfghf");
+	snprintf(dec['2'], (RWIDTH +1), "ghighighig");
+	snprintf(dec['3'], (RWIDTH +1), "hijhijhijh");
+	snprintf(dec['4'], (RWIDTH +1), "ijaijaijai");
+	snprintf(dec['5'], (RWIDTH +1), "jabjabjabj");
+	snprintf(dec['6'], (RWIDTH +1), "abcabcabca");
+	snprintf(dec['7'], (RWIDTH +1), "bcdbcdbcdb");
+	snprintf(dec['8'], (RWIDTH +1), "cdecdecdec");
+	snprintf(dec['9'], (RWIDTH +1), "defdefdefd");
 
-	snprintf(dec['a'], 9, "34534534");
-	snprintf(dec['b'], 9, "23423423");
-	snprintf(dec['c'], 9, "12312312");
-	snprintf(dec['d'], 9, "01201201");
-	snprintf(dec['e'], 9, "90190190");
-	snprintf(dec['f'], 9, "89089089");
-	snprintf(dec['g'], 9, "78978978");
-	snprintf(dec['h'], 9, "67867867");
-	snprintf(dec['i'], 9, "56756756");
-	snprintf(dec['j'], 9, "45645645");
-	snprintf(dec['k'], 9, "vutsrqpo");
-	snprintf(dec['l'], 9, "wvutsrqp");
-	snprintf(dec['m'], 9, "xwvutsrq");
-	snprintf(dec['n'], 9, "yxwvutsr");
-	snprintf(dec['o'], 9, "zyxwvuts");
-	snprintf(dec['p'], 9, "kzyxwvut");
-	snprintf(dec['q'], 9, "lkzyxwvu");
-	snprintf(dec['r'], 9, "mlkzyxwv");
-	snprintf(dec['s'], 9, "nmlkzyxw");
-	snprintf(dec['t'], 9, "onmlkzyx");
-	snprintf(dec['u'], 9, "ponmikzy");
-	snprintf(dec['v'], 9, "qponmlkz");
-	snprintf(dec['w'], 9, "rqponmlk");
-	snprintf(dec['x'], 9, "srqponml");
-	snprintf(dec['y'], 9, "tsrqponm");
-	snprintf(dec['z'], 9, "utsrqpon");
+	snprintf(dec['a'], (RWIDTH +1), "3453453453");
+	snprintf(dec['b'], (RWIDTH +1), "2342342342");
+	snprintf(dec['c'], (RWIDTH +1), "1231231231");
+	snprintf(dec['d'], (RWIDTH +1), "0120120120");
+	snprintf(dec['e'], (RWIDTH +1), "9019019019");
+	snprintf(dec['f'], (RWIDTH +1), "8908908908");
+	snprintf(dec['g'], (RWIDTH +1), "7897897897");
+	snprintf(dec['h'], (RWIDTH +1), "6786786786");
+	snprintf(dec['i'], (RWIDTH +1), "5675675675");
+	snprintf(dec['j'], (RWIDTH +1), "4564564564");
+	snprintf(dec['k'], (RWIDTH +1), "vutsrqponm");
+	snprintf(dec['l'], (RWIDTH +1), "wvutsrqpon");
+	snprintf(dec['m'], (RWIDTH +1), "xwvutsrqpo");
+	snprintf(dec['n'], (RWIDTH +1), "yxwvutsrqp");
+	snprintf(dec['o'], (RWIDTH +1), "zyxwvutsrq");
+	snprintf(dec['p'], (RWIDTH +1), "kzyxwvutsr");
+	snprintf(dec['q'], (RWIDTH +1), "lkzyxwvuts");
+	snprintf(dec['r'], (RWIDTH +1), "mlkzyxwvut");
+	snprintf(dec['s'], (RWIDTH +1), "nmlkzyxwvu");
+	snprintf(dec['t'], (RWIDTH +1), "onmlkzyxwv");
+	snprintf(dec['u'], (RWIDTH +1), "ponmlkzyxw");
+	snprintf(dec['v'], (RWIDTH +1), "qponmlkzyx");
+	snprintf(dec['w'], (RWIDTH +1), "rqponmlkzy");
+	snprintf(dec['x'], (RWIDTH +1), "srqponmlkz");
+	snprintf(dec['y'], (RWIDTH +1), "tsrqponmlk");
+	snprintf(dec['z'], (RWIDTH +1), "utsrqponml");
 
-	snprintf(dec['A'], 9, "FGHIJKLM");
-	snprintf(dec['B'], 9, "GHIJKLMN");
-	snprintf(dec['C'], 9, "HIJKLMNO");
-	snprintf(dec['D'], 9, "IJKLMNOP");
-	snprintf(dec['E'], 9, "JKLMNOPQ");
-	snprintf(dec['F'], 9, "KLMNOPQR");
-	snprintf(dec['G'], 9, "LMNOPQRS");
-	snprintf(dec['H'], 9, "MNOPQRST");
-	snprintf(dec['I'], 9, "NOPQRSTU");
-	snprintf(dec['J'], 9, "OPQRSTUV");
-	snprintf(dec['K'], 9, "PQRSTUVW");
-	snprintf(dec['L'], 9, "QRSTUVWX");
-	snprintf(dec['M'], 9, "RSTUVWXY");
-	snprintf(dec['N'], 9, "STUVWXYZ");
-	snprintf(dec['O'], 9, "TUVWXYZA");
-	snprintf(dec['P'], 9, "UVWXYZAB");
-	snprintf(dec['Q'], 9, "VWXYZABC");
-	snprintf(dec['R'], 9, "WXYZABCD");
-	snprintf(dec['S'], 9, "XYZABCDE");
-	snprintf(dec['T'], 9, "YZABCDEF");
-	snprintf(dec['U'], 9, "ZABCDEFG");
-	snprintf(dec['V'], 9, "ABCDEFGH");
-	snprintf(dec['W'], 9, "BCDEFGHI");
-	snprintf(dec['X'], 9, "CDEFGHIJ");
-	snprintf(dec['Y'], 9, "DEFGHIJK");
-	snprintf(dec['Z'], 9, "EFGHIJKL");
+	snprintf(dec['A'], (RWIDTH +1), "FGHIJKLMNO");
+	snprintf(dec['B'], (RWIDTH +1), "GHIJKLMNOP");
+	snprintf(dec['C'], (RWIDTH +1), "HIJKLMNOPQ");
+	snprintf(dec['D'], (RWIDTH +1), "IJKLMNOPQR");
+	snprintf(dec['E'], (RWIDTH +1), "JKLMNOPQRS");
+	snprintf(dec['F'], (RWIDTH +1), "KLMNOPQRST");
+	snprintf(dec['G'], (RWIDTH +1), "LMNOPQRSTU");
+	snprintf(dec['H'], (RWIDTH +1), "MNOPQRSTUV");
+	snprintf(dec['I'], (RWIDTH +1), "NOPQRSTUVW");
+	snprintf(dec['J'], (RWIDTH +1), "OPQRSTUVWX");
+	snprintf(dec['K'], (RWIDTH +1), "PQRSTUVWXY");
+	snprintf(dec['L'], (RWIDTH +1), "QRSTUVWXYZ");
+	snprintf(dec['M'], (RWIDTH +1), "RSTUVWXYZA");
+	snprintf(dec['N'], (RWIDTH +1), "STUVWXYZAB");
+	snprintf(dec['O'], (RWIDTH +1), "TUVWXYZABC");
+	snprintf(dec['P'], (RWIDTH +1), "UVWXYZABCD");
+	snprintf(dec['Q'], (RWIDTH +1), "VWXYZABCDE");
+	snprintf(dec['R'], (RWIDTH +1), "WXYZABCDEF");
+	snprintf(dec['S'], (RWIDTH +1), "XYZABCDEFG");
+	snprintf(dec['T'], (RWIDTH +1), "YZABCDEFGH");
+	snprintf(dec['U'], (RWIDTH +1), "ZABCDEFGHI");
+	snprintf(dec['V'], (RWIDTH +1), "ABCDEFGHIJ");
+	snprintf(dec['W'], (RWIDTH +1), "BCDEFGHIJK");
+	snprintf(dec['X'], (RWIDTH +1), "CDEFGHIJKL");
+	snprintf(dec['Y'], (RWIDTH +1), "DEFGHIJKLM");
+	snprintf(dec['Z'], (RWIDTH +1), "EFGHIJKLMN");
 
 
 	// Generate the encoding matrix
 	//
-	for (unsigned int c = 0; c < 8; c++) {
+	for (unsigned int c = 0; c < RWIDTH; c++) {
+		for (unsigned int z = 0; z < '0'; z++) {
+			enc[z][c] = 0;
+		}
+	}
+
+	for (unsigned int c = 0; c < RWIDTH; c++) {
 		for (unsigned int z = '0'; z <= 'z'; z++) {
-			unsigned int o = dec[z][c];
-			if (o >= '0') enc[o][c] = z;
+			unsigned int o;
+			if (isalpha(z)) {
+				o = dec[z][c];
+				enc[o][c] = z;
+			}
+			else if (isdigit(z)) {
+				o = dec[z][c % 3];
+				enc[o][c] = z;
+			}
 		}
 	}
 
@@ -91,14 +106,16 @@ void translate_init( void ) {
 
 int decode( char *dest, char *s, ssize_t l ) {
 	ssize_t i = 0;
-	int r = 0; // rotation
+
 	while ( i < l && *s ) {
-		if (isalnum(*s)) {
-			dest[i] = dec[(ssize_t)*s][r % 8];
-			r++;
+		if (isalpha(*s)) {
+			dest[i] = dec[(ssize_t)*s][i % RWIDTH];
+
+		} else if (isdigit(*s)) {
+			dest[i] = dec[(ssize_t)*s][i % 3];
+
 		} else {
 			dest[i] = *s;
-			r = 0;
 		}
 		i++;
 		s++;
@@ -109,14 +126,16 @@ int decode( char *dest, char *s, ssize_t l ) {
 
 int encode( char *dest, char *s, ssize_t l ) {
 	ssize_t i = 0;
-	int r = 0;
 	while ( i < l && *s ) {
-		if (isalnum(*s)) {
-			dest[i] = enc[(ssize_t)*s][r % 8];
-			r++;
+
+		if (*s >= 'a' && *s <= 'j') {
+			dest[i] = enc[(ssize_t)*s][i % 3];
+
+		} else if (isalnum(*s)) {
+			dest[i] = enc[(ssize_t)*s][i % RWIDTH];
+
 		} else {
 			dest[i] = *s;
-			r = 0;
 		}
 		i++;
 		s++;
@@ -133,15 +152,15 @@ int main( int argc, char **argv ) {
 	//
 	fprintf(stdout,"// Decoding Matrix\n");
 	fprintf(stdout,"//\n");
-	fprintf(stdout,"char dec['z'][9] = {\n");
+	fprintf(stdout,"char dec['z'+1][%d] = {\n", RWIDTH+1);
 	for (int i = 0; i <= 'z'; i++) {
 		fprintf(stdout,"\t { ");
-		for (int j = 0; j < 8; j++) {
+		for (int j = 0; j < RWIDTH; j++) {
 			char o = dec[i][j];
 			if (isprint(o)) {
-				fprintf(stdout, "'%c'%s", o, j==7?"":", ");
+				fprintf(stdout, "'%c'%s", o, j==(RWIDTH-1)?"":", ");
 			} else {
-				fprintf(stdout, "%d%s", o, j==7?"":", ");
+				fprintf(stdout, "%d%s", o, j==(RWIDTH-1)?"":", ");
 			}
 		}
 		if (isprint(i)) fprintf(stdout," }, // '%c'\n", i);
@@ -152,15 +171,15 @@ int main( int argc, char **argv ) {
 
 	fprintf(stdout,"// Encoding Matrix\n");
 	fprintf(stdout,"//\n");
-	fprintf(stdout,"char enc['z'][9] = {\n");
+	fprintf(stdout,"char enc['z'+1][%d] = {\n", RWIDTH +1);
 	for (int i = 0; i <= 'z'; i++) {
 		fprintf(stdout,"\t{ ");
-		for (int c = 0; c < 8; c++) {
+		for (int c = 0; c < RWIDTH; c++) {
 			char o = enc[i][c];
 			if (isprint(o)) {
-				fprintf(stdout, "'%c'%s", o, c==7?"":", ");
+				fprintf(stdout, "'%c'%s", o, c==(RWIDTH -1)?"":", ");
 			} else {
-				fprintf(stdout, "%d%s", o, c==7?"":", ");
+				fprintf(stdout, "%d%s", o, c==(RWIDTH -1)?"":", ");
 			}
 		}
 		if (isprint(i)) fprintf(stdout," }, // '%c'\n", i);
