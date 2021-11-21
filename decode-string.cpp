@@ -112,7 +112,7 @@ int decode( char *dest, char *s, ssize_t l ) {
 			dest[i] = dec[(ssize_t)*s][i % 3];
 
 		}
-			else if (isalpha(*s)) {
+		else if (isalpha(*s)) {
 			dest[i] = dec[(ssize_t)*s][i % RWIDTH];
 
 		} else {
