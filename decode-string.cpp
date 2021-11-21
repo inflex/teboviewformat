@@ -3,13 +3,13 @@
 #include <string.h>
 #include <ctype.h>
 
-char dec['z'][9];
-char enc['z'][9];
+char dec['z'][9] = {0};
+char enc['z'][9] = {0};
 
 void translate_init( void ) {
 
-	memset(dec, '\0', sizeof(dec));
-	memset(enc, '\0', sizeof(enc));
+	memset(dec, 0, sizeof(dec));
+	memset(enc, 0, sizeof(enc));
 
 	snprintf(dec['0'], 9, "efgefgef");
 	snprintf(dec['1'], 9, "fghfghfg");
@@ -79,10 +79,10 @@ void translate_init( void ) {
 
 	// Generate the encoding matrix
 	//
-	for (int c = 0; c < 8; c++) {
-		for (char z = '0'; z <= 'z'; z++) {
-			char o = dec[(ssize_t)z][(ssize_t)c];
-			enc[(ssize_t)o][(ssize_t)c] = z;
+	for (unsigned int c = 0; c < 8; c++) {
+		for (unsigned int z = '0'; z <= 'z'; z++) {
+			unsigned int o = dec[z][c];
+			if (o >= '0') enc[o][c] = z;
 		}
 	}
 
@@ -137,10 +137,11 @@ int main( int argc, char **argv ) {
 	for (int i = 0; i <= 'z'; i++) {
 		fprintf(stdout,"\t { ");
 		for (int j = 0; j < 8; j++) {
-			if (isprint(dec[i][j])) {
-				fprintf(stdout, "'%c'%s", dec[i][j], j==7?"":", ");
+			char o = dec[i][j];
+			if (isprint(o)) {
+				fprintf(stdout, "'%c'%s", o, j==7?"":", ");
 			} else {
-				fprintf(stdout, "%d%s", dec[i][j], j==7?"":", ");
+				fprintf(stdout, "%d%s", o, j==7?"":", ");
 			}
 		}
 		if (isprint(i)) fprintf(stdout," }, // '%c'\n", i);
@@ -156,7 +157,7 @@ int main( int argc, char **argv ) {
 		fprintf(stdout,"\t{ ");
 		for (int c = 0; c < 8; c++) {
 			char o = enc[i][c];
-			if (o) {
+			if (isprint(o)) {
 				fprintf(stdout, "'%c'%s", o, c==7?"":", ");
 			} else {
 				fprintf(stdout, "%d%s", o, c==7?"":", ");
