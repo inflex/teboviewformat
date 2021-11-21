@@ -108,11 +108,12 @@ int decode( char *dest, char *s, ssize_t l ) {
 	ssize_t i = 0;
 
 	while ( i < l && *s ) {
-		if (isalpha(*s)) {
-			dest[i] = dec[(ssize_t)*s][i % RWIDTH];
-
-		} else if (isdigit(*s)) {
+		if (isdigit(*s) || (*s >= 'a' && *s <= 'j')) {
 			dest[i] = dec[(ssize_t)*s][i % 3];
+
+		}
+			else if (isalpha(*s)) {
+			dest[i] = dec[(ssize_t)*s][i % RWIDTH];
 
 		} else {
 			dest[i] = *s;
@@ -128,10 +129,10 @@ int encode( char *dest, char *s, ssize_t l ) {
 	ssize_t i = 0;
 	while ( i < l && *s ) {
 
-		if (*s >= 'a' && *s <= 'j') {
+		if (isdigit(*s) || (*s >= 'a' && *s <= 'j')) {
 			dest[i] = enc[(ssize_t)*s][i % 3];
 
-		} else if (isalnum(*s)) {
+		} else if (isalpha(*s)) {
 			dest[i] = enc[(ssize_t)*s][i % RWIDTH];
 
 		} else {
