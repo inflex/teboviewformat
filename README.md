@@ -5,6 +5,8 @@ An attempt to reverse engineer enough of the Teboview (tvw) file format to allow
 ## NO FURTHER UPDATES
 After 2 years the format has been reverse engineered however due to the extensive work required and personal investment, I'll be keeping this one closed until such time that I've recouped my time investment ( perhaps $10~15k USD worth ). You however can now obtain FlexBV Free, Demo or licenced versions at https://pldaniels.com/flexbv5 which provide boardviewer support for this format.
 
+Massive thanks to @WerWolv and his fantastic ImHex project, without which this decoding would have taken even longer.  If you want to try reverse engineering file formats I strongly recommend you take a look at ImHex available at https://github.com/WerWolv/ImHex
+
 
 ## Intro
 The teboview file (.tvw) is an EDA type package which includes all details for the production and testing of PCBs.  The purpose of this decoding attempt is so that we can write an import/reading module in order to view a simplified version in boardview packages such as OpenBoardview.
